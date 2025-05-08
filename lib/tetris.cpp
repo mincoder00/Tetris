@@ -8,8 +8,8 @@ using namespace std;
 
 void init_game(GameState& state) {
     srand(888);
-    state.board = std::vector<std::vector<char>>(BOARD_HEIGHT, std::vector<char>(BOARD_WIDTH, '.'));
-    state.current_block = std::vector<std::vector<int>>(4, std::vector<int>(4, 0));
+    state.board = vector<vector<char>>(BOARD_HEIGHT, vector<char>(BOARD_WIDTH, '.'));
+    state.current_block = vector<vector<int>>(4, vector<int>(4, 0));
     state.tetrominoes = {
         // I-tetromino (2 rotations)
         {
@@ -190,7 +190,7 @@ void handle_game_action(GameState& state, int action) {
     }
 }
 
-bool is_valid_position(const std::vector<std::vector<char>>& board, int x, int y, const std::vector<std::vector<int>>& block) {
+bool is_valid_position(const vector<vector<char>>& board, int x, int y, const vector<vector<int>>& block) {
     for (int i = 0; i < 4; ++i) {
         for (int j = 0; j < 4; ++j) {
             if (block[i][j]) {
