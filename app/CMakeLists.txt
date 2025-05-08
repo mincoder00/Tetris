@@ -1,11 +1,18 @@
-file(GLOB_RECURSE APP_SRC_FILES CONFIGURE_DEPENDS
-  ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp
-)
+cmake_minimum_required(VERSION 3.11)
 
-add_executable(app ${APP_SRC_FILES})
+project(
+  Tetris_cpp
+  VERSION 0.2
+  DESCRIPTION "Tetris in cpp"
+  LANGUAGES CXX)
 
-target_link_libraries(app PRIVATE Tetris_cpp ${CURSES_LIBRARIES})
-target_include_directories(app PRIVATE ${CMAKE_SOURCE_DIR}/include)
+find_package(Curses REQUIRED)
+include_directories(${CMAKE_SOURCE_DIR}/include)
 
-target_compile_options(app PRIVATE -Wall -Werror)
-target_compile_features(app PRIVATE cxx_std_17)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
+add_subdirectory(app)
+add_subdirectory(lib)
