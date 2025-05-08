@@ -1,12 +1,18 @@
-﻿# CMakeList.txt: Tetris에 대한 CMake 프로젝트, 여기에 소스를 포함하고
-# 프로젝트 특정 논리를 정의합니다.
-#
+﻿cmake_minimum_required(VERSION 3.11)
 
-# 이 프로젝트의 실행 파일에 소스를 추가합니다.
-add_executable (Tetris   "app/main.cpp" "include/ui.h" "lib/tetris.cpp" "lib/ui.cpp")
+project(
+  Tetris_cpp
+  VERSION 0.2
+  DESCRIPTION "Tetris in cpp"
+  LANGUAGES CXX)
 
-if (CMAKE_VERSION VERSION_GREATER 3.12)
-  set_property(TARGET Tetris PROPERTY CXX_STANDARD 20)
-endif()
+find_package(Curses REQUIRED)
+include_directories(${CMAKE_SOURCE_DIR}/include)
 
-# TODO: 필요한 경우 테스트를 추가하고 대상을 설치합니다.
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
+add_subdirectory(app)
+add_subdirectory(lib)
